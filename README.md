@@ -17,3 +17,5 @@ true/false
 uses: actions/contributor-labeler@v1.1
 with:
   author: some-user-name
+
+...
