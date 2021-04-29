@@ -1,4 +1,4 @@
-name: Contributor Labeler v4
+name: Contributor Labeler v4.1
 on:
   pull_request:
     types: [opened]
