@@ -1,0 +1,13 @@
+name: 'Contributor Labeler'
+description: 'Add the contributor label to a PR if the author is not in the CODEOWNERS file'
+inputs:
+  author:  # id of input
+    description: 'Who to check for'
+    required: true
+    default: 'user'
+outputs:
+  is_contributor: # id of output
+    description: 'Is the author a contributor?'
+runs:
+  using: 'node12'
+  main: 'index.js'
