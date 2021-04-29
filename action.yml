@@ -10,4 +10,4 @@ outputs:
     description: 'Is the author a contributor?'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
