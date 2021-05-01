@@ -1,4 +1,4 @@
-name: Contributor Labeler v4.5.2
+name: Contributor Labeler v4.5.3
 on:
   pull_request:
     types: [opened]
@@ -12,8 +12,8 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-        # with:
-        #   path: "contributor-labeler"
+        with:
+          path: "contributor-labeler"
       - name: Contributor Labeler Action
         uses: ./ # Uses an action in the root directory
         id: labeler

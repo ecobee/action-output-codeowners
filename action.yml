@@ -13,5 +13,5 @@ outputs:
     description: 'Is the author a contributor?'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
-  # main: 'index.js'
+  # main: 'dist/index.js'
+  main: 'index.js'
