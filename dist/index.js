@@ -2299,7 +2299,8 @@ const codeOwnersUtils = __nccwpck_require__(775);
   try {
     // `author` input defined in action metadata file
     const author = core.getInput('author');
-  
+    core.debug(`author:${author}`);
+
     // get the code owners
     const codeownerPath = core.getInput('path') || './CODEOWNERS'
     const results = await codeOwnersUtils.loadOwners(codeownerPath);
@@ -2310,12 +2311,16 @@ const codeOwnersUtils = __nccwpck_require__(775);
       if (owner.charAt(0)) {
         owner = owner.slice(1);
       }
+
+      core.debug(`owner:${owner}`);
       return owner;
     });
 
     // is author in the array?
-    const is_contributor = !cleanedOwners.includes(author)
-    core.setOutput("is_contributor", is_contributor);
+    const inCodeOwners = cleanedOwners.includes(author)
+
+    core.debug(`inCodeOwners:${inCodeOwners}`);
+    core.setOutput("inCodeOwners", inCodeOwners);
   
   } catch (error) {
     core.setFailed(error.message);

@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.0.1
+name: Contributor Labeler v0.0.2
 on:
   pull_request:
     types: [opened]
@@ -6,7 +6,7 @@ on:
 jobs:
   contributor_labeler_job:
     runs-on: ubuntu-latest
-    name: A job to say something
+    name: If author is not in CODEOWNERS, add contributor label
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -22,13 +22,12 @@ jobs:
           author: ${{ github.actor }}
           path: "contributor-labeler"
 
-      # Use the output from the `hello` step
-      # - name: Get the output
-      #   run: echo "The output is ${{ steps.labeler.outputs.is_contributor }}"
+      - name: Get the output
+        run: echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
 
       - name: Add Label
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ steps.labeler.outputs.is_contributor }}
+        if: ${{ !steps.labeler.outputs.inCodeOwners }}
         with:
           labels: contributor
           github_token: "${{ secrets.GITHUB_TOKEN }}"

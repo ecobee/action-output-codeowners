@@ -1,5 +1,5 @@
 name: 'Contributor Labeler'
-description: 'Add the contributor label to a PR if the author is not in the CODEOWNERS file'
+description: 'Determine if the author is in the CODEOWNERS file'
 inputs:
   author:  # id of input
     description: 'Who to check for'
@@ -9,8 +9,8 @@ inputs:
     description: 'Alternative location for the CODEOWNERS file'
     required: false
 outputs:
-  is_contributor: # id of output
-    description: 'Is the author a contributor?'
+  inCodeOwners: # id of output
+    description: 'Is the author in CODEOWNERS?'
 runs:
   using: 'node12'
   main: 'dist/index.js'
