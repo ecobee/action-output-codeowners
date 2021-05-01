@@ -20,6 +20,7 @@
   "homepage": "https://github.com/duthied/contributor-labeler#readme",
   "dependencies": {
     "@actions/core": "^1.2.7",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "codeowners-utils": "^1.0.2"
   }
 }

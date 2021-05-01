@@ -1,4 +1,4 @@
-name: Contributor Labeler v4.3
+name: Contributor Labeler v4.5
 on:
   pull_request:
     types: [opened]
@@ -12,11 +12,14 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: "contributor-labeler"
       - name: Contributor Labeler Action
         uses: ./ # Uses an action in the root directory
         id: labeler
         with:
           author: ${{ github.actor }}
+          path: "contributor-labeler"
       # Use the output from the `hello` step
       - name: Get the output
         run: echo "The output is ${{ steps.labeler.outputs.is_contributor }}"

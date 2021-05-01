@@ -5,9 +5,13 @@ inputs:
     description: 'Who to check for'
     required: true
     default: 'user'
+  path: # location for codeowners file
+    description: 'Alternative location for the CODEOWNERS file'
+    required: false
 outputs:
   is_contributor: # id of output
     description: 'Is the author a contributor?'
 runs:
   using: 'node12'
   main: 'dist/index.js'
+  # main: 'index.js'
