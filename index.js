@@ -20,7 +20,7 @@ const codeOwnersUtils = require('codeowners-utils');
     });
 
     // is author in the array?
-    const is_contributor = cleanedOwners.includes(author)
+    const is_contributor = !cleanedOwners.includes(author)
     core.setOutput("is_contributor", is_contributor);
   
   } catch (error) {

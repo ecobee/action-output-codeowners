@@ -2314,7 +2314,7 @@ const codeOwnersUtils = __nccwpck_require__(775);
     });
 
     // is author in the array?
-    const is_contributor = cleanedOwners.includes(author)
+    const is_contributor = !cleanedOwners.includes(author)
     core.setOutput("is_contributor", is_contributor);
   
   } catch (error) {
