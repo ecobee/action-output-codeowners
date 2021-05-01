@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.0.2
+name: Contributor Labeler v0.0.3
 on:
   pull_request:
     types: [opened]
@@ -27,7 +27,7 @@ jobs:
 
       - name: Add Label
         uses: actions-ecosystem/action-add-labels@v1
-        if: ${{ !steps.labeler.outputs.inCodeOwners }}
+        if: ${{ steps.labeler.outputs.inCodeOwners == false }}
         with:
           labels: contributor
           github_token: "${{ secrets.GITHUB_TOKEN }}"
