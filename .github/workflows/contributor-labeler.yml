@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.7
+name: Contributor Labeler v0.8
 on:
   pull_request:
     types: [opened]
@@ -9,7 +9,7 @@ jobs:
     name: If author is not in CODEOWNERS, add contributor label
     steps:
       - name: Debug
-        run: echo "v0.7"
+        run: echo "v0.8"
         
       # To use this repository's private action,
       # you must check out the repository
@@ -29,7 +29,7 @@ jobs:
         run: echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
 
       - name: Add Label
-        if: ${{ true }}
+        if: ${{ false }}
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: contributor
