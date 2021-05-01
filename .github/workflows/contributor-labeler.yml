@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     name: If author is not in CODEOWNERS, add contributor label
     steps:
+      - name: Debug
+        run: echo "v0.7"
+        
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
@@ -26,6 +29,7 @@ jobs:
         run: echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
 
       - name: Add Label
+        if: ${{ true }}
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: contributor
