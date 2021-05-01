@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.14
+name: Contributor Labeler v0.16
 on:
   pull_request:
     types: [opened]
@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     name: If author is not in CODEOWNERS, add contributor label
     steps:
-      - name: Debug
-        run: echo "v0.14"
+      - name: Version
+        run: echo "v0.16"
         
       # To use this repository's private action,
       # you must check out the repository
@@ -26,15 +26,12 @@ jobs:
           path: "contributor-labeler"
           
       - name: Get the output
-        run: |
-          echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
-          echo "The true and eval is ${{ true && steps.labeler.outputs.inCodeOwners }}"
-          echo "The false and eval is ${{ false && steps.labeler.outputs.inCodeOwners }}"
+        run: echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
           
       - name: Add Label
         # invert the boolean since we only want to add the label
         # when the author is _not_ in CODEOWNERS
-        if: ${{ false && steps.labeler.outputs.inCodeOwners }}
+        if: ${{ steps.labeler.outputs.inCodeOwners == false }}
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: contributor
