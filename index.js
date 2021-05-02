@@ -3,9 +3,6 @@ const codeOwnersUtils = require('codeowners-utils');
 
 (async () => {
   try {
-    // `author` input defined in action metadata file
-    const author = core.getInput('author');
-    core.debug(`author:${author}`);
 
     // get the code owners
     const codeownerPath = core.getInput('path') || './CODEOWNERS'
@@ -22,11 +19,8 @@ const codeOwnersUtils = require('codeowners-utils');
       return owner;
     });
 
-    // is author in the array?
-    const isExternalContributor = !cleanedOwners.includes(author)
-
-    core.debug(`isExternalContributor:${isExternalContributor}`);
-    core.setOutput("isExternalContributor", isExternalContributor);
+    core.debug(`cleanedOwners:${cleanedOwners}`);
+    core.setOutput("owners", cleanedOwners);
   
   } catch (error) {
     core.setFailed(error.message);

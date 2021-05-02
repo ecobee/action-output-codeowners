@@ -1,16 +1,12 @@
 name: 'Contributor Labeler'
-description: 'Determine if the author is NOT in the CODEOWNERS file'
+description: 'Output an array of the users in CODEOWNERS'
 inputs:
-  author:  # id of input
-    description: 'Who to check for'
-    required: true
-    default: 'user'
   path: # location for codeowners file
     description: 'Alternative location for the CODEOWNERS file'
     required: false
 outputs:
-  isExternalContributor: # id of output
-    description: 'Is the author NOT in CODEOWNERS?'
+  owners: # id of output
+    description: 'Array of owners'
 runs:
   using: 'node12'
   main: 'dist/index.js'

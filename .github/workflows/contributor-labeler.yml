@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.22
+name: Contributor Labeler v0.24
 on:
   pull_request:
     types: [opened]
@@ -9,29 +9,33 @@ jobs:
     name: If author is not in CODEOWNERS, add contributor label
     steps:
       - name: Version
-        run: echo "v0.22"
+        run: echo "v0.24"
         
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
         # with:
-        #   path: "contributor-labeler"
+          # path: "contributor-labeler"
 
       - name: Contributor Labeler Action
         uses: ./ # Uses an action in the root directory
         id: labeler
         with:
-          author: ${{ github.actor }}
+          # author: ${{ github.actor }}
           path: "contributor-labeler"
           
       - name: Get the output
-        run: echo "The output is ${{ steps.labeler.outputs.isExternalContributor }}"
+        run: |
+          echo "The author is ${{ github.actor }}"          
+          echo "The output is ${{ steps.labeler.outputs.owners }}"
+          echo "The conditional's output is ${{ contains(steps.labeler.outputs.owners, github.actor) == false }}"
           
       - name: Add Label
         # invert the boolean since we only want to add the label
         # when the author is _not_ in CODEOWNERS
-        if: ${{ steps.labeler.outputs.isExternalContributor }}
+        if: ${{ contains(steps.labeler.outputs.owners, github.actor) == false }}
+        # if: ${{ false }}
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: contributor
