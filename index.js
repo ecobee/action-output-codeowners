@@ -23,10 +23,10 @@ const codeOwnersUtils = require('codeowners-utils');
     });
 
     // is author in the array?
-    const inCodeOwners = cleanedOwners.includes(author)
+    const isExternalContributor = !cleanedOwners.includes(author)
 
-    core.debug(`inCodeOwners:${inCodeOwners}`);
-    core.setOutput("inCodeOwners", inCodeOwners);
+    core.debug(`isExternalContributor:${isExternalContributor}`);
+    core.setOutput("isExternalContributor", isExternalContributor);
   
   } catch (error) {
     core.setFailed(error.message);

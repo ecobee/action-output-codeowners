@@ -1,4 +1,4 @@
-name: Contributor Labeler v0.20
+name: Contributor Labeler v0.21
 on:
   pull_request:
     types: [opened]
@@ -9,7 +9,7 @@ jobs:
     name: If author is not in CODEOWNERS, add contributor label
     steps:
       - name: Version
-        run: echo "v0.20"
+        run: echo "v0.21"
         
       # To use this repository's private action,
       # you must check out the repository
