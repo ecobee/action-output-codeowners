@@ -26,12 +26,12 @@ jobs:
           path: "contributor-labeler"
           
       - name: Get the output
-        run: echo "The output is ${{ steps.labeler.outputs.inCodeOwners }}"
+        run: echo "The output is ${{ steps.labeler.outputs.isExternalContributor }}"
           
       - name: Add Label
         # invert the boolean since we only want to add the label
         # when the author is _not_ in CODEOWNERS
-        if: ${{ steps.labeler.outputs.isContributor }}
+        if: ${{ steps.labeler.outputs.isExternalContributor }}
         uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: contributor
