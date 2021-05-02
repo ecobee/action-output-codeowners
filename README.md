@@ -6,9 +6,13 @@ Github action to label PRs with 'contributor' if the author isn't in the CODEOWN
 
 **Required** The name of the person who authored the PR. Default `"user"`.
 
+### `path`
+
+The location for codeowners file, Alternative location for the CODEOWNERS file
+    
 ## Outputs
 
-### `is_contributor`
+### `isExternalContributor`
 
 true/false
 
