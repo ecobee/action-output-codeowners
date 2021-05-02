@@ -15,6 +15,7 @@ Array of the owners from the CODEOWNERS file in the repository
 
 ## Example usage (add a label if the PR author isn't in CODEOWNERS)
 
+```
 - name: Contributor Labeler Action
   uses: ./ # Uses an action in the root directory
   id: labeler
@@ -29,4 +30,4 @@ Array of the owners from the CODEOWNERS file in the repository
     labels: contributor
     github_token: "${{ secrets.GITHUB_TOKEN }}"
 
-...
+```
