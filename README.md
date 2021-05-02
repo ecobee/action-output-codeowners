@@ -1,10 +1,7 @@
 # contributor-labeler
-Github action to label PRs with 'contributor' if the author isn't in the CODEOWNERS file
+Github action to return the list of owners in CODEOWNERS file
 
 ## Inputs
-### `author`
-
-**Required** The name of the person who authored the PR. Default `"user"`.
 
 ### `path`
 
