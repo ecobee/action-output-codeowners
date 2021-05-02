@@ -17,7 +17,7 @@ Array of the owners from the CODEOWNERS file in the repository
 
 ```
 - name: Contributor Labeler Action
-  uses: ./ # Uses an action in the root directory
+  uses: duthied/contributor-labeler@v1
   id: labeler
   with:
     path: "contributor-labeler"
@@ -25,7 +25,7 @@ Array of the owners from the CODEOWNERS file in the repository
 - name: Add Label
   # if the list of codeowners doesn't contain the PR author add the label
   if: ${{ contains(steps.labeler.outputs.owners, github.actor) == false }}
-  uses: actions-ecosystem/action-add-labels@v1
+  uses: duthied/action-add-labels@v1.02
   with:
     labels: contributor
     github_token: "${{ secrets.GITHUB_TOKEN }}"
