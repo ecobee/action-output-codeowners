@@ -7,10 +7,10 @@ const util = require('./util');
     // get the code owners
     let codeownerPath;
     if (!core.getInput('owners_location')) {
-      codeownerPath = './CODEOWNERS'
+      codeownerPath = './CODEOWNERS';
       core.debug(` codeownerPath not provided, defaulting: ${codeownerPath}`);
     } else {
-      codeownerPath = core.getInput('owners_location')
+      codeownerPath = core.getInput('owners_location');
       core.debug(` codeownerPath provided: ${codeownerPath}`);
     }
     
