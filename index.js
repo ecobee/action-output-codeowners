@@ -6,7 +6,7 @@ const util = require('./util');
 
     // get the code owners
     let codeownerPath;
-    if !(core.getInput('owners_location')) {
+    if (!core.getInput('owners_location')) {
       codeownerPath = './CODEOWNERS'
       core.debug(` codeownerPath not provided, defaulting: ${codeownerPath}`);
     } else {
