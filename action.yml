@@ -1,7 +1,7 @@
 name: 'Contributor Labeler'
 description: 'Output an array of the users in CODEOWNERS'
 inputs:
-  location: # location for codeowners file
+  owners_location: # location for codeowners file
     description: 'Location for the CODEOWNERS file if it is not in the root of the repo'
     required: false
 outputs:

@@ -20,7 +20,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: labeler
         with:
-          path: "contributor-labeler/.github/CODEOWNERS"
+          owners_location: "./.github/CODEOWNERS"
           
       - name: Add Label
         # if the list of codeowners doesn't contain the PR author add the label
