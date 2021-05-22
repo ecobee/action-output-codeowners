@@ -1,8 +1,8 @@
 name: 'Contributor Labeler'
 description: 'Output an array of the users in CODEOWNERS'
 inputs:
-  path: # location for codeowners file
-    description: 'Alternative location for the CODEOWNERS file'
+  location: # location for codeowners file
+    description: 'Location for the CODEOWNERS file if it is not in the root of the repo'
     required: false
 outputs:
   owners: # id of output
@@ -10,6 +10,7 @@ outputs:
 runs:
   using: 'node12'
   main: 'dist/index.js'
+  # main: '../index.js'
 branding:
   icon: 'award'  
   color: 'green'

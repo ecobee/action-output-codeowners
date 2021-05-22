@@ -5,8 +5,11 @@ const codeOwnersUtils = require('codeowners-utils');
   try {
 
     // get the code owners
-    const codeownerPath = core.getInput('path') || './CODEOWNERS'
+    const codeownerPath = core.getInput('location') || './CODEOWNERS'
+    core.debug(` codeownerPath -> ${codeownerPath}`);
+
     const results = await codeOwnersUtils.loadOwners(codeownerPath);
+    // core.debug(` results -> ${results}`);
 
     // remove the `@` to compare to author
     const cleanedOwners = results.map(line => {
