@@ -21,9 +21,11 @@ jobs:
         id: labeler
         with:
           owners_location: "./.github/CODEOWNERS"
+          
+      - name: Get color
         run: |
           echo "owners: ${{ steps.labeler.outputs.owners }} author: ${{ github.actor }}"
-          
+        
       - name: Add Label
         # if the list of codeowners doesn't contain the PR author add the label
         if: ${{ contains(steps.labeler.outputs.owners, github.actor) == false }}
