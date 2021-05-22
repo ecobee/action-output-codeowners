@@ -22,7 +22,7 @@ jobs:
         with:
           owners_location: "./.github/CODEOWNERS"
           
-      - name: Get color
+      - name: Debug
         run: |
           echo "owners: ${{ steps.labeler.outputs.owners }} author: ${{ github.actor }}"
         
