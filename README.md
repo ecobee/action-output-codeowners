@@ -31,4 +31,3 @@ Array of the owners from the CODEOWNERS file in the repository
     github_token: "${{ secrets.GITHUB_TOKEN }}"
 
 ```
-
