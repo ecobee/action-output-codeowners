@@ -1,25 +1,24 @@
 const core = require('@actions/core');
-const codeOwnersUtils = require('codeowners-utils');
+const util = require('./util');
 
 (async () => {
   try {
 
     // get the code owners
-    const codeownerPath = core.getInput('path') || './CODEOWNERS'
-    const results = await codeOwnersUtils.loadOwners(codeownerPath);
+    const codeownerPath = core.getInput('owners_location') || './CODEOWNERS'
+    // core.debug(` codeownerPath -> ${codeownerPath}`);
+
+    const owners = await util.loadOwners(codeownerPath);
 
     // remove the `@` to compare to author
-    const cleanedOwners = results.map(line => {
-      let owner = line.owners[0];
+    const cleanedOwners = owners.map(owner => {
       if (owner.charAt(0)) {
         owner = owner.slice(1);
       }
-
-      core.debug(`owner:${owner}`);
       return owner;
     });
 
-    core.debug(`cleanedOwners:${cleanedOwners}`);
+    // core.debug(`cleanedOwners:${cleanedOwners}`);
     core.setOutput("owners", cleanedOwners);
   
   } catch (error) {
