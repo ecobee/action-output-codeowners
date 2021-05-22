@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const codeOwnersUtils = require('codeowners-utils');
 
 (async () => {
   try {
@@ -8,7 +7,7 @@ const codeOwnersUtils = require('codeowners-utils');
     const codeownerPath = core.getInput('location') || './CODEOWNERS'
     core.debug(` codeownerPath -> ${codeownerPath}`);
 
-    const results = await codeOwnersUtils.loadOwners(codeownerPath);
+    // const results = await codeOwnersUtils.loadOwners(codeownerPath);
     // core.debug(` results -> ${results}`);
 
     // remove the `@` to compare to author
