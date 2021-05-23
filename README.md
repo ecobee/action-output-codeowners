@@ -3,9 +3,9 @@ Github action to return the list of owners in CODEOWNERS file
 
 ## Inputs
 
-### `path`
+### `owners_location`
 
-The location for codeowners file, Alternative location for the CODEOWNERS file
+Location for the CODEOWNERS file if it is not in the root of the repo
     
 ## Outputs
 
