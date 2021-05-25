@@ -1,4 +1,4 @@
-name: 'Contributor Labeler'
+name: 'Output Codeowners'
 description: 'Output an array of the users in CODEOWNERS'
 inputs:
   owners_location: # location for codeowners file
