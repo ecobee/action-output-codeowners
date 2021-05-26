@@ -14,9 +14,6 @@ const util = require('./util');
       core.debug(` codeownerPath provided: ${codeownerPath}`);
     }
     
-//     const codeownerPath = core.getInput('owners_location') || './CODEOWNERS'
-//     core.debug(` codeownerPath -> ${codeownerPath}`);
-
     const owners = await util.loadOwners(codeownerPath);
 
     // remove the `@` to compare to author
