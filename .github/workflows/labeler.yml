@@ -1,15 +1,15 @@
-name: Contributor Labeler v1.05
+name: Labeler v1.06
 on:
   pull_request:
     types: [opened]
 
 jobs:
-  contributor_labeler_job:
+  labeler_job:
     runs-on: ubuntu-latest
     name: If author is not in CODEOWNERS, add contributor label
     steps:
       - name: Version
-        run: echo "v1.05"
+        run: echo "v1.06"
         
       # To use this repository's private action,
       # you must check out the repository

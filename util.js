@@ -27,10 +27,10 @@ function parse(contents) {
 
 function getCodeOwnersPath(filePath) {
   if (!filePath) {
-    codeownerPath = './CODEOWNERS';
-    core.debug(` codeownerPath not provided, defaulting: ${codeownerPath}`);
+    filePath = './CODEOWNERS';
+    core.debug(` codeownerPath not provided, defaulting: ${filePath}`);
   } else {
-    core.debug(` codeownerPath provided: ${codeownerPath}`);
+    core.debug(` codeownerPath provided: ${filePath}`);
   }
   return filePath;
 }
@@ -43,7 +43,7 @@ function cleanCodeOwners(owners) {
    }
    return owner;
  });
- core.debug(`cleanedOwners: ${cleanedOwners}`);
+ core.debug(`cleanedOwners: ${cleaned}}`);
 
  return cleaned;
 }
