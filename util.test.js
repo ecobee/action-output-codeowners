@@ -1,8 +1,10 @@
+const fs = require( 'fs')
+
 const { getCodeOwnersPath, cleanCodeOwners, loadOwners } = require('./lib');
 
 const mockCodeownersPath = './some_path';
 const mockCodeownersName = 'CODEOWNERS';
-// const mockCodeownersContents = '/ @one @two';
+const mockCodeownersContents = '/ @one @two';
 
 describe("Get codeowners path", () => {
   const defaultPath = './CODEOWNERS';
@@ -25,26 +27,32 @@ describe("Clean codeowners contents", () => {
   });
 });
 
-// describe("Load owners", () => {
+describe("Load owners", () => {
+  jest.mock('fs')
 
-//   beforeAll(() => {});
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-//   afterAll(() => {});
+  afterAll(() => {});
 
-//   test("should return null if passed null", async () => {
-//     expect.assertions(1);
-//     const response = await loadOwners(null);
+  test("should return null if passed null", async () => {
+    expect.assertions(1);
+    const response = await loadOwners(null);
 
-//     expect(response).toBe(null);
-//   });  
+    expect(response).toBe(null);
+  });  
 
-//   test("should parse the entries, returning an array of the contents", async () => {
-//     const pathProvided = `${mockCodeownersPath}/${mockCodeownersName}`;
-//     const expected = ['@one', '@two']
+  test("should parse the entries, returning an array of the contents", async () => {
+    const pathProvided = `${mockCodeownersPath}/${mockCodeownersName}`;
+    const expected = ['@one', '@two']
 
-//     expect.assertions(1);
-//     const response = await loadOwners(pathProvided);
+    const mockReadFile = jest.spyOn(fs, 'readFileSync')
+    mockReadFile.mockImplementation(() => mockCodeownersContents);
 
-//     expect(response).toBe(expected);
-//   });
-// });
+    expect.assertions(1);
+    const response = await loadOwners(pathProvided, mockReadFile);
+
+    expect(response).toEqual(expected);
+  });
+});
