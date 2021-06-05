@@ -25,6 +25,31 @@ function parse(contents) {
   return entries;
 }
 
+function getCodeOwnersPath(filePath) {
+  if (!filePath) {
+    codeownerPath = './CODEOWNERS';
+    core.debug(` codeownerPath not provided, defaulting: ${codeownerPath}`);
+  } else {
+    core.debug(` codeownerPath provided: ${codeownerPath}`);
+  }
+  return filePath;
+}
+
+function cleanCodeOwners(owners) {
+  const cleaned = owners.map(owner => {
+    core.debug(`owner: ${owner}`);
+   if (owner.charAt(0)) {
+     owner = owner.slice(1);
+   }
+   return owner;
+ });
+ core.debug(`cleanedOwners: ${cleanedOwners}`);
+
+ return cleaned;
+}
+
 module.exports = {
-  loadOwners
+  loadOwners,
+  getCodeOwnersPath,
+  cleanCodeOwners
 }

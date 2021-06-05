@@ -31,3 +31,7 @@ Array of the owners from the CODEOWNERS file in the repository
     github_token: "${{ secrets.GITHUB_TOKEN }}"
 
 ```
+
+Note: the `node_modules` directory and contents are checked in since GitHub downloads each action run in a workflow during runtime and executes it as a complete package of code before you can use workflow commands like run to interact with the runner machine. This means you must include any package dependencies required to run the JavaScript code.  See https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github
+
+Alternatively, NCC could be used (https://github.com/vercel/ncc) but I haven't done that yet.
