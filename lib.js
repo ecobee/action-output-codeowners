@@ -1,13 +1,12 @@
-const fs = require("fs");
 const util = require("util");
 const core = require('@actions/core');
 
-let readFile = util.promisify(fs.readFile);
-
-async function loadOwners(path) {
+async function loadOwners(path, fs) {
   core.debug(` [loadOwners] -> path: ${path}`);
   if (!path) return null;
   
+  let readFile = util.promisify(fs.readFile);
+
   let contents = await readFile(path, "utf-8");
   core.debug(` [loadOwners] -> contents: ${contents}`);
 

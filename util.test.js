@@ -1,4 +1,4 @@
-const { getCodeOwnersPath, cleanCodeOwners, loadOwners } = require('./util');
+const { getCodeOwnersPath, cleanCodeOwners, loadOwners } = require('./lib');
 
 const mockCodeownersPath = './some_path';
 const mockCodeownersName = 'CODEOWNERS';
