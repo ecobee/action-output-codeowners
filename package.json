@@ -4,7 +4,7 @@
   "description": "Github action to label PRs with 'contributor' if the author isn't in the CODEOWNERS file",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "package": "ncc build --source-map --license licenses.txt",
     "act": "act -j contributor_labeler_job"
   },
