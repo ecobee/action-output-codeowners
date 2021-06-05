@@ -4,10 +4,13 @@
   "description": "Github action to label PRs with 'contributor' if the author isn't in the CODEOWNERS file",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "package": "ncc build --source-map --license licenses.txt",
     "act": "act -j contributor_labeler_job"
   },
+  "pre-commit": [
+    "test"
+  ],
   "repository": "git+https://github.com/duthied/contributor-labeler.git",
   "keywords": [],
   "author": "Devlon Duthie <duthied@gmail.com>",
@@ -18,7 +21,8 @@
   "homepage": "https://github.com/duthied/contributor-labeler#readme",
   "dependencies": {
     "@actions/core": "^1.3.0",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "pre-commit": "^1.2.2"
   },
   "devDependencies": {
     "jest": "^27.0.4"
