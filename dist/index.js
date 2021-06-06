@@ -1,7 +1,7 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 978:
+/***/ 1:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(87));
-const utils_1 = __nccwpck_require__(395);
+const utils_1 = __nccwpck_require__(885);
 /**
  * Commands
  *
@@ -100,7 +100,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 482:
+/***/ 361:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -135,9 +135,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(978);
-const file_command_1 = __nccwpck_require__(522);
-const utils_1 = __nccwpck_require__(395);
+const command_1 = __nccwpck_require__(1);
+const file_command_1 = __nccwpck_require__(155);
+const utils_1 = __nccwpck_require__(885);
 const os = __importStar(__nccwpck_require__(87));
 const path = __importStar(__nccwpck_require__(622));
 /**
@@ -386,7 +386,7 @@ exports.getState = getState;
 
 /***/ }),
 
-/***/ 522:
+/***/ 155:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -417,7 +417,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(747));
 const os = __importStar(__nccwpck_require__(87));
-const utils_1 = __nccwpck_require__(395);
+const utils_1 = __nccwpck_require__(885);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -435,7 +435,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 395:
+/***/ 885:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -462,16 +462,12 @@ exports.toCommandValue = toCommandValue;
 
 /***/ }),
 
-/***/ 506:
+/***/ 417:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const fs = __nccwpck_require__(747);
-const util = __nccwpck_require__(669);
-const core = __nccwpck_require__(482);
+const core = __nccwpck_require__(361);
 
-let readFile = util.promisify(fs.readFile);
-
-async function loadOwners(path) {
+async function loadOwners(path, readFile) {
   core.debug(` [loadOwners] -> path: ${path}`);
   if (!path) return null;
   
@@ -492,8 +488,33 @@ function parse(contents) {
   return entries;
 }
 
+function getCodeOwnersPath(filePath) {
+  if (!filePath) {
+    filePath = './CODEOWNERS';
+    core.debug(` codeownerPath not provided, defaulting: ${filePath}`);
+  } else {
+    core.debug(` codeownerPath provided: ${filePath}`);
+  }
+  return filePath;
+}
+
+function cleanCodeOwners(owners) {
+  const cleaned = owners.map(owner => {
+    core.debug(`owner: ${owner}`);
+   if (owner.charAt(0)) {
+     owner = owner.slice(1);
+   }
+   return owner;
+ });
+ core.debug(`cleanedOwners: ${cleaned}}`);
+
+ return cleaned;
+}
+
 module.exports = {
-  loadOwners
+  loadOwners,
+  getCodeOwnersPath,
+  cleanCodeOwners
 }
 
 
@@ -570,37 +591,23 @@ module.exports = require("util");;
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-const core = __nccwpck_require__(482);
-const util = __nccwpck_require__(506);
+const core = __nccwpck_require__(361);
+const lib = __nccwpck_require__(417);
+const fs = __nccwpck_require__(747);
+const util = __nccwpck_require__(669);
 
 (async () => {
   try {
 
     // get the code owners
-    let codeownerPath;
-    if (!core.getInput('owners_location')) {
-      codeownerPath = './CODEOWNERS';
-      core.debug(` codeownerPath not provided, defaulting: ${codeownerPath}`);
-    } else {
-      codeownerPath = core.getInput('owners_location');
-      core.debug(` codeownerPath provided: ${codeownerPath}`);
-    }
+    const codeownerPath = lib.getCodeOwnersPath(core.getInput('owners_location'));
+
+    let readFile = util.promisify(fs.readFile);
+    const owners = await lib.loadOwners(codeownerPath, readFile);
     
-//     const codeownerPath = core.getInput('owners_location') || './CODEOWNERS'
-//     core.debug(` codeownerPath -> ${codeownerPath}`);
-
-    const owners = await util.loadOwners(codeownerPath);
-
     // remove the `@` to compare to author
-    const cleanedOwners = owners.map(owner => {
-       core.debug(`owner: ${owner}`);
-      if (owner.charAt(0)) {
-        owner = owner.slice(1);
-      }
-      return owner;
-    });
+    const cleanedOwners = lib.cleanCodeOwners(owners);
 
-    core.debug(`cleanedOwners: ${cleanedOwners}`);
     core.setOutput("owners", cleanedOwners);
   
   } catch (error) {
